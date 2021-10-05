@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>neuroaikit.tf.layers.snubasiccell.SNUBasicCell &mdash; NeuroAIKit  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="neuroaikit.tf.layers.snulicell" href="neuroaikit.tf.layers.snulicell.html" />
+    <link rel="prev" title="neuroaikit.tf.layers.snubasiccell" href="neuroaikit.tf.layers.snubasiccell.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/neuromorphic_150_text.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SNU.html">2. SNU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Getting_started.html">3. Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Examples/index.html">4. Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Code:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="neuroaikit.html">neuroaikit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="neuroaikit.common.html">neuroaikit.common</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neuroaikit.dataset.html">neuroaikit.dataset</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="neuroaikit.tf.html">neuroaikit.tf</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="neuroaikit.tf.activations.html">neuroaikit.tf.activations</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="neuroaikit.tf.layers.html">neuroaikit.tf.layers</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="neuroaikit.tf.layers.snu.html">neuroaikit.tf.layers.snu</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="neuroaikit.tf.layers.snubasiccell.html">neuroaikit.tf.layers.snubasiccell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neuroaikit.tf.layers.snulicell.html">neuroaikit.tf.layers.snulicell</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Python module index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Community:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contact.html">Contact</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NeuroAIKit</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="neuroaikit.html">neuroaikit</a> &raquo;</li>
+        
+          <li><a href="neuroaikit.tf.html">neuroaikit.tf</a> &raquo;</li>
+        
+          <li><a href="neuroaikit.tf.layers.html">neuroaikit.tf.layers</a> &raquo;</li>
+        
+          <li><a href="neuroaikit.tf.layers.snubasiccell.html">neuroaikit.tf.layers.snubasiccell</a> &raquo;</li>
+        
+      <li>neuroaikit.tf.layers.snubasiccell.SNUBasicCell</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="neuroaikit-tf-layers-snubasiccell-snubasiccell">
+<h1>neuroaikit.tf.layers.snubasiccell.SNUBasicCell<a class="headerlink" href="#neuroaikit-tf-layers-snubasiccell-snubasiccell" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="neuroaikit.tf.layers.snubasiccell.SNUBasicCell">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neuroaikit.tf.layers.snubasiccell.</span></span><span class="sig-name descname"><span class="pre">SNUBasicCell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">units</span></em>, <em class="sig-param"><span class="pre">decay=0.8</span></em>, <em class="sig-param"><span class="pre">activation=&lt;function</span> <span class="pre">step_function&gt;</span></em>, <em class="sig-param"><span class="pre">g=&lt;function</span> <span class="pre">identity&gt;</span></em>, <em class="sig-param"><span class="pre">recurrent=False</span></em>, <em class="sig-param"><span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/neuroaikit/tf/layers/snubasiccell.html#SNUBasicCell"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neuroaikit.tf.layers.snubasiccell.SNUBasicCell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tensorflow.python.keras._impl.keras.engine.base_layer.Layer</span></code></p>
+<p>This is a basic SNU cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>units</strong> – Number of units to create in the layer</p></li>
+<li><p><strong>decay</strong> – Membrane potential decay multiplier, defaults to 0.8,
+i.e. 0.8 of the previous membrane potential is retained</p></li>
+<li><p><strong>activation</strong> – Activation function, defaults to step_function. See TF_Misc.Activations.</p></li>
+<li><p><strong>g</strong> – Internal state activation function that optionally constraints the state,
+defaults to tf.identity (no constraint)</p></li>
+<li><p><strong>recurrent</strong> – bool, defaults to False. If True, SNU includes recurrent connections inside entire layer.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Constructor method</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_loss</span></code></p></td>
+<td><p>Add loss tensor(s), potentially dependent on layer inputs.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_update</span></code></p></td>
+<td><p>Add update op(s), potentially dependent on layer inputs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_variable</span></code></p></td>
+<td><p>Adds a new variable to the layer, or gets an existing one; returns it.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_weight</span></code></p></td>
+<td><p>Adds a weight variable to the layer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code></p></td>
+<td><p>Apply the layer on a input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#neuroaikit.tf.layers.snubasiccell.SNUBasicCell.build" title="neuroaikit.tf.layers.snubasiccell.SNUBasicCell.build"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build</span></code></a></p></td>
+<td><p>Overriding build method that creates the variables</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#neuroaikit.tf.layers.snubasiccell.SNUBasicCell.call" title="neuroaikit.tf.layers.snubasiccell.SNUBasicCell.call"><code class="xref py py-obj docutils literal notranslate"><span class="pre">call</span></code></a></p></td>
+<td><p>Overriding call method that defines the cell dynamics’ graph</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_mask</span></code></p></td>
+<td><p>Computes an output mask tensor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_output_shape</span></code></p></td>
+<td><p>Computes the output shape of the layer.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">count_params</span></code></p></td>
+<td><p>Count the total number of scalars composing the weights.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_config</span></code></p></td>
+<td><p>Creates a layer from its config.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_config</span></code></p></td>
+<td><p>Returns the config of the layer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_at</span></code></p></td>
+<td><p>Retrieves the input tensor(s) of a layer at a given node.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_mask_at</span></code></p></td>
+<td><p>Retrieves the input mask tensor(s) of a layer at a given node.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_shape_at</span></code></p></td>
+<td><p>Retrieves the input shape(s) of a layer at a given node.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_losses_for</span></code></p></td>
+<td><p>Retrieves losses relevant to a specific set of inputs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_at</span></code></p></td>
+<td><p>Retrieves the output tensor(s) of a layer at a given node.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_mask_at</span></code></p></td>
+<td><p>Retrieves the output mask tensor(s) of a layer at a given node.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_shape_at</span></code></p></td>
+<td><p>Retrieves the output shape(s) of a layer at a given node.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_updates_for</span></code></p></td>
+<td><p>Retrieves updates relevant to a specific set of inputs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_weights</span></code></p></td>
+<td><p>Returns the current weights of the layer.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_weights</span></code></p></td>
+<td><p>Sets the weights of the layer, from Numpy arrays.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">activity_regularizer</span></code></p></td>
+<td><p>Optional regularizer function for the output of this layer.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dtype</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">graph</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inbound_nodes</span></code></p></td>
+<td><p>Deprecated, do NOT use! Only for compatibility with external Keras.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">input</span></code></p></td>
+<td><p>Retrieves the input tensor(s) of a layer.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_mask</span></code></p></td>
+<td><p>Retrieves the input mask tensor(s) of a layer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_shape</span></code></p></td>
+<td><p>Retrieves the input shape(s) of a layer.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">losses</span></code></p></td>
+<td><p>Losses which are associated with this <cite>Layer</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">non_trainable_variables</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">non_trainable_weights</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">outbound_nodes</span></code></p></td>
+<td><p>Deprecated, do NOT use! Only for compatibility with external Keras.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output</span></code></p></td>
+<td><p>Retrieves the output tensor(s) of a layer.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_mask</span></code></p></td>
+<td><p>Retrieves the output mask tensor(s) of a layer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_shape</span></code></p></td>
+<td><p>Retrieves the output shape(s) of a layer.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">scope_name</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">trainable_variables</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">trainable_weights</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">updates</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">variables</span></code></p></td>
+<td><p>Returns the list of all layer variables/weights.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">weights</span></code></p></td>
+<td><p>Returns the list of all layer variables/weights.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="neuroaikit.tf.layers.snubasiccell.SNUBasicCell.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shape</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/neuroaikit/tf/layers/snubasiccell.html#SNUBasicCell.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neuroaikit.tf.layers.snubasiccell.SNUBasicCell.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overriding build method that creates the variables</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>input_shape</strong> – Shape of the input</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neuroaikit.tf.layers.snubasiccell.SNUBasicCell.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/neuroaikit/tf/layers/snubasiccell.html#SNUBasicCell.call"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neuroaikit.tf.layers.snubasiccell.SNUBasicCell.call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overriding call method that defines the cell dynamics’ graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputs</strong> – Tensor representing the input in particular timestep</p></li>
+<li><p><strong>states</strong> – Tuple with previous state values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Output values, State values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="neuroaikit.tf.layers.snulicell.html" class="btn btn-neutral float-right" title="neuroaikit.tf.layers.snulicell" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="neuroaikit.tf.layers.snubasiccell.html" class="btn btn-neutral float-left" title="neuroaikit.tf.layers.snubasiccell" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, IBM Research.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+neuroaikit.tf.activations.leaky\_rel
+====================================
+
+.. currentmodule:: neuroaikit.tf.activations
+
+.. autofunction:: leaky_rel

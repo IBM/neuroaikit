@@ -1,0 +1,6 @@
+neuroaikit.tf.activations.step\_function
+========================================
+
+.. currentmodule:: neuroaikit.tf.activations
+
+.. autofunction:: step_function

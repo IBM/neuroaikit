@@ -1,0 +1,6 @@
+neuroaikit.dataset.datasets.JSB
+===============================
+
+.. currentmodule:: neuroaikit.dataset.datasets
+
+.. autofunction:: JSB

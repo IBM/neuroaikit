@@ -1,0 +1,435 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "| [![View in NeuroAIKit Documentation](../_static/toolkit_32px.png)](https://ibm.github.io/neuroaikit/Examples/MNIST.html) |  [![View source on GitHub](../_static/github_32px.png)](https://github.com/IBM/neuroaikit/blob/master/Website/Applications/MNIST.ipynb) |\n",
+    "| - | - |\n",
+    "| View in NeuroAIKit Documentation | View source on GitHub |"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Image recognition (MNIST)\n",
+    "\n",
+    "This tutorial shows how to:\n",
+    "\n",
+    "1. Transform static images from MNIST dataset into a temporal stream of spikes (rate coding).\n",
+    "1. Build a conventional LSTM network and a spiking network.\n",
+    "1. Train and evaluate the accuracy and the speed of both models."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Prepare the input data"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Import common and TensorFlow-specific modules:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import neuroaikit as ai\n",
+    "import neuroaikit.tf as aitf"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "and other modules:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import time\n",
+    "import tensorflow as tf"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Load MNIST dataset:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "(train_x, train_y), (test_x, test_y) = tf.keras.datasets.mnist.load_data()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This is a static dataset comprising 60000 training images of size 28x28:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(60000, 28, 28)"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "train_x.shape"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Let's use the `transform_rate` function to convert the grayscale pixel values into spike rates over `Ns` time steps:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Ns = 20\n",
+    "max_rate_spikes = 6"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# This may take several seconds to execute:\n",
+    "train_x = ai.utils.transform_rate(train_x.reshape(train_x.shape[0], -1) / 255.0, Ns, max_rate_spikes)\n",
+    "test_x = ai.utils.transform_rate(test_x.reshape(test_x.shape[0], -1) / 255.0, Ns, max_rate_spikes)\n",
+    "train_y = tf.keras.utils.to_categorical(train_y) # convert the labels to one-hot representation\n",
+    "test_y = tf.keras.utils.to_categorical(test_y)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This is now a temporal dataset comprising 60000 images of 28x28=784, coded over `Ns` timesteps:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(60000, 20, 784)"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "train_x.shape"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Let's visualize the spikes for a few inputs starting from input line 180:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import matplotlib.pyplot as plt\n",
+    "import numpy as np"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Text(0, 0.5, 'Input index')"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "image/png": "iVBORw0KGgoAAAANSUhEUgAAAXsAAAEWCAYAAACHVDePAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjMuNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8QVMy6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAWmklEQVR4nO3dfZQsdX3n8fdHLkjkQcB7YxSNF9B1o64PbEcF0WVXDwI+YNQVNFExa9CsBszqGs56TmSz65416ko0MYLGSJQgik+ooKAhBhXRvsgzGNGVFbzKKIogRgG/+0fVxWaYnul7Z6p75tb7dU6f6a7+ddV3amo+U/Orql+lqpAkbd/uMesCJEndM+wlqQcMe0nqAcNeknrAsJekHjDsJakHDHttl5KcneTF7fOjk3xh1jUBJHlikq/Pug71j2GvVSvJQUm+lOSmJDcm+WKS357ks1V1WFWdssL1nJDk/cuZR1WdX1UPXamapEmtm3UB0kKS7A58EvhD4IPATsATgZ/Psq7FJAmQqvrlrGuR5nPPXqvVvwKoqtOq6o6q+llVnVNVl8KdXTNfTPKX7Z7/1UmevOXDSf4xyUsXmnGSNyX5QpJ7t4+/SbI5yfVJ/meSHRb4zKHAfwOOTHJLkktGlvOGJF8EbgX2TfKSJFcluTnJt5K8bGQ+Bye5buT1t5O8Jsml7fdxepKd2/fWJ/lkkh+3/9mcn8TfWW0TNxytVv8M3JHklCSHJdlzgTaPA74JrAdeD3wkyV7jZpjkHkneBTwSOKSqbgLeC9wOPBh4DHAIcLc/ElX1aeB/AadX1a5V9aiRt18IHAPsBlwL3AA8HdgdeAnw1iT7L/K9Pg84FNinre3odvqrgeuADcB9af7YOL6Jtolhr1Wpqn4CHEQTbu8C5pKcmeS+I81uAE6sqtuq6nTg68DTxsxyR+A0YC/gGVV1azuvw4FXVdVPq+oG4K3AUVtZ7nur6oqqur2t5VNV9c1qfB44h6YLapy3VdV3q+pG4BPAo9vptwH3Ax7Uzvf8cjArbSPDXqtWVV1VVUdX1QOARwD3B04caXL9vPC7tm2zkAcDRwD/vap+0U57EM0fgc1tV8mPgZOAX9/KUr8z+qL9T+TLbdfLj2n+oKxf5PPfG3l+K7Br+/xNwDXAOW130PFbWZd0J8Nea0JVXU3T5fKIkcl7twdFt/hN4LtjZnEVTZfK2Um2nA3zHZoDvuurao/2sXtVPXxcGUtNT3JP4MPAm4H7VtUewFlAFv7oeFV1c1W9uqr2BZ4J/JfR4xLS1jDstSol+ddJXp3kAe3rBwLPB7480uzXgWOT7JjkPwK/RROsC6qq02j6vT+bZL+q2kzTxfKWJLu3ffr7Jfl3Y2bxfWDjEgdJdwLuCcwBtyc5jOY4wFZL8vQkD27/oN0E3AF4po+2iWGv1epmmgOwFyb5KU3IX05z0HKLC4GHAD8A3gA8t6p+uNhM23Pv/wz4hyQbgRfRBPSVwI+AM2j6yRfyofbrD5NcNGb+NwPH0pwu+iPgBcCZi9W0iIcAnwVuAS4A3lFV523jvNRz8XiP1qIkRwMvraqDZl2LtBa4Zy9JPWDYS1IP2I0jST3gnr0k9cCqGght/fr1tXHjxlmXIUlrxqZNm35QVRuWareqwn7jxo0Mh8NZlyFJa0aSaydpZzeOJPWAYS9JPWDYS1IPGPaS1AOGvST1gGE/BUeedAFHnnTBrMtYs5a7/lz/y9P39be9fP+GvST1gGEvST1g2EtSDxj2ktQDhr0k9cCqGuJ4MBiUY+NI0uSSbKqqwVLt3LOXpB4w7CWpBwx7SeoBw16SesCwl6QeMOwlqQcMe0nqAcNeknrAsJekHjDsJakHDHtJ6gHDXpJ6wLCXpB4w7CWpBwx7SeqBTsM+yR8nuSLJ5UlOS7Jzl8vryvZyd3nNxlrffmZdf9+Xv1I6C/skewPHAoOqegSwA3BUV8uTJI3XdTfOOuDXkqwD7gV8t+PlSZIW0FnYV9X1wJuB/wdsBm6qqnPmt0tyTJJhkuHc3FxX5UhSr3XZjbMncASwD3B/YJckvze/XVWdXFWDqhps2LChq3Ikqde67MZ5CvB/q2quqm4DPgIc2OHyJEljpKq6mXHyOOA9wG8DPwPeCwyr6u3jPjMYDGo4HHZSjyRtj5JsqqrBUu267LO/EDgDuAi4rF3WyV0tT5I03rouZ15Vrwde3+UyJElL8wpaSeoBw16SesCwl6QeMOwlqQcMe0nqAcNeknrAsJekHjDsJakHDHtJ6gHDXpJ6wLCXpB4w7CWpBwx7SeoBw34Cy727/Fq/O/1ar3/WXH/LM+v1t5zlz7r2UYa9JPWAYS9JPWDYS1IPGPaS1AOGvST1QKpq1jXcaTAY1HA4nHUZkrRmJNlUVYOl2rlnL0k9YNhLUg8Y9pLUA4a9JPWAYS9JPWDYS1IPGPaS1AOGvST1gGEvST1g2EtSDxj2ktQDhr0k9YBhL0k9YNhLUg8Y9pLUA52GfZI9kpyR5OokVyU5oMvlrVar6Q7zfeT613JsL9vPuo7n/xfAp6vquUl2Au7V8fIkSQvoLOyT3Bt4EnA0QFX9AvhFV8uTJI3XZTfOPsAc8LdJvpbk3Ul2md8oyTFJhkmGc3NzHZYjSf3VZdivA/YH/rqqHgP8FDh+fqOqOrmqBlU12LBhQ4flSFJ/dRn21wHXVdWF7eszaMJfkjRlqaruZp6cD7y0qr6e5ARgl6r6r+PaDwaDGg6HndUjSdubJJuqarBUu67Pxvkj4NT2TJxvAS/peHmSpAV0GvZVdTGw5F8cSVK3vIJWknpgybBP8r72nPktrx+U5HPdliVJWkmT7Nl/AbgwyeFJ/gA4Fzix06okSStqyT77qjopyRXAecAPgMdU1fc6r0yStGIm6cZ5IfAe4EXAe4Gzkjyq47okSStokrNxngMcVFU3AKcl+ShwCvDoLguTJK2cSbpxngWQ5F5VdWtVfSXJYzuvTJK0YibpxjkgyZXA1e3rR+EBWklaUyY5G+dE4KnADwGq6hKaoYslSWvERBdVVdV35k26o4NaJEkdmeQA7XeSHAhUkh2B44Crui1LkrSSJtmzfznwCmBv4Hqas3Be0WFNkqQVNsnZOD8AfncKtUiSOjI27JO8HRg72H1VHdtJRbqbLXe2P/1lB8y4Es3Ccn/+s95+1vryZ13/SlmsG2cIbAJ2prnD1Dfax6OBnTqvTJK0Ysbu2VfVKQBJ/pDmCtrb29fvBM6fTnmSpJUwyQHaPYHdR17v2k6TJK0Rk5x6+b+BryU5DwjNBVUndFmUJGllTXI2zt8mORt4XDvpTxziWJLWllSNPeHmV42SvYEHMfLHoar+aaWLGQwGNRwOV3q2krTdSrKpqpa81/eSe/ZJ3ggcCVwB/LKdXMCKh70kqRuT9Nk/C3hoVf2841okSR2Z5GycbwE7dl2IJKk7k+zZ3wpcnORzwJ17915BK0lrxyRhf2b7kCStUZOcennKNAqRJHVnsYHQPlhVz0tyGQsMiFZVj+y0MknSillsz/649uvTp1GIJKk7iw2Etrn9eu30ypEkdWGie9BKktY2w16SemDJsE9y3CTTJEmr1yR79i9eYNrRK1yHJKlDi516+XzgBcA+SUYvqtoNuLHrwiRJK2exUy+/BGwG1gNvGZl+M3Bpl0VJklbWYqdeXgtcCyzrlupJdqC5efn1VTWTc/b7fnf5tV6/pOWbZDz7m/nVFbQ70YyA+dOq2n38p+7iOOAq7nofW0nSFC15gLaqdquq3dtw/zXgOcA7Jpl5kgcATwPevawqJUnLslXn2VfjY8BTJ/zIicBr+dUdru4myTFJhkmGc3NzW1OOJGlCk3TjPHvk5T2AAfAvE3zu6cANVbUpycHj2lXVycDJ0NyDdqn5SpK23iTj2T9j5PntwLeBIyb43BOAZyY5HNgZ2D3J+6vq97a6SknSsqSq+53pds/+NUudjTMYDGo4HHZejyRtL5JsqqrBUu0mGS5h3ySfSDKX5IYkH0+y78qUKUmahkkO0P498EHgfsD9gQ8Bp23NQqrqH2d1jr0kabKwv1dVva+qbm8f76fpg5ckrRGTHKA9O8nxwAdoLq46EjgryV4AVeU4OZK0yk0S9s9rv75s3vSjaMLf/ntJWuWWDPuq2mcahUiSujPJnj1JDgQ2jravqr/rqCZJ0gqb5Ara9wH7ARcDd7STCzDsJWmNmGTPfgA8rKZx9ZUkqROTnHp5OfAbXRciSerOJHv264Erk3wF+PmWiVX1zM6qkiStqEnC/oSui5AkdWuSUy8/P41CJEndGRv2825HeJe3aO5j4m0GJWmNWOyG47tNsxBJUne26raEs3TkSRdw5EkXzLqMmejz9w5+/7M26/U/6+VvL9ZM2EuStp1hL0k9YNhLUg8Y9pLUA4a9JPVAVtP4ZoPBoIbD4azLkKQ1I8mmqhos1c49e0nqAcNeknrAsJekHjDsJakHDHtJ6gHDXpJ6wLCXpB4w7CWpBwx7SeoBw16SesCwl6QeMOwlqQcMe0nqAcNeknrAsJekHugs7JM8MMl5Sa5MckWS47pa1lK8O71mye1vedby+ltNta/rcN63A6+uqouS7AZsSnJuVV3Z4TIlSQvobM++qjZX1UXt85uBq4C9u1qeJGm8qfTZJ9kIPAa4cIH3jkkyTDKcm5ubRjmS1Dudh32SXYEPA6+qqp/Mf7+qTq6qQVUNNmzY0HU5ktRLnYZ9kh1pgv7UqvpIl8uSJI2XqupmxkmAU4Abq+pVk3xmMBjUcDjspB5J2h4l2VRVg6Xadbln/wTghcB/SHJx+zi8w+VJksbo7NTLqvoCkK7mL0manFfQSlIPGPaS1AOGvST1gGEvST1g2EtSDxj2ktQDhr0k9YBhL0k9YNhLUg8Y9pLUA4a9JPWAYS9JPWDYS1IPGPZTsNw7zM/68+o3t5/tg2EvST1g2EtSDxj2ktQDhr0k9YBhL0k9kKqadQ13GgwGNRwOZ12GJK0ZSTZV1WCpdu7ZS1IPGPaS1AOGvST1gGEvST1g2EtSDxj2ktQDhr0k9YBhL0k9YNhLUg8Y9pLUA4a9JPWAYS9JPWDYS1IPGPaS1AOGvST1QKdhn+TQJF9Pck2S45czrz7f4b7P3/v2YLk/P3/+WgmdhX2SHYC/Ag4DHgY8P8nDulqeJGm8LvfsHwtcU1XfqqpfAB8AjuhweZKkMboM+72B74y8vq6ddhdJjkkyTDKcm5vrsBxJ6q+ZH6CtqpOralBVgw0bNsy6HEnaLnUZ9tcDDxx5/YB2miRpylJV3cw4WQf8M/BkmpD/KvCCqrpi3GcGg0ENh8NO6pGk7VGSTVU1WKrduq4KqKrbk7wS+AywA/CexYJektSdzsIeoKrOAs7qchmSpKXN/ACtJKl7hr0k9YBhL0k9YNhLUg90durltkgyB1y7SJP1wA+mVM7WWs21gfUtl/Utj/Vtu6Vqe1BVLXlF6qoK+6UkGU5yPuksrObawPqWy/qWx/q23UrVZjeOJPWAYS9JPbDWwv7kWRewiNVcG1jfclnf8ljftluR2tZUn70kadustT17SdI2MOwlqQdWXdgvdZPyJPdMcnr7/oVJNk6xtgcmOS/JlUmuSHLcAm0OTnJTkovbx59Oq752+d9Oclm77LuNF53G29r1d2mS/adY20NH1svFSX6S5FXz2kx1/SV5T5Ibklw+Mm2vJOcm+Ub7dc8xn31x2+YbSV48xfrelOTq9uf30SR7jPnsottCh/WdkOT6kZ/h4WM+u+jveke1nT5S17eTXDzms9NYdwvmSWfbX1WtmgfNUMjfBPYFdgIuAR42r81/Bt7ZPj8KOH2K9d0P2L99vhvNeP3z6zsY+OQM1+G3gfWLvH84cDYQ4PHAhTP8WX+P5oKQma0/4EnA/sDlI9P+HDi+fX488MYFPrcX8K32657t8z2nVN8hwLr2+RsXqm+SbaHD+k4AXjPBz3/R3/Uuapv3/luAP53hulswT7ra/lbbnv0kNyk/AjilfX4G8OQkmUZxVbW5qi5qn98MXMUC99Vd5Y4A/q4aXwb2SHK/GdTxZOCbVbXYFdOdq6p/Am6cN3l0GzsFeNYCH30qcG5V3VhVPwLOBQ6dRn1VdU5V3d6+/DLNXeBmYsz6m8Qkv+ud1dZmxvOA01ZymVtjkTzpZPtbbWE/yU3K72zTbvA3AfeZSnUj2u6jxwAXLvD2AUkuSXJ2kodPtzIKOCfJpiTHLPD+RDeCn4KjGP+LNsv1B3DfqtrcPv8ecN8F2qyW9fj7NP+pLWSpbaFLr2y7md4zphti1uvvicD3q+obY96f6rqblyedbH+rLezXhCS7Ah8GXlVVP5n39kU0XROPAt4OfGzK5R1UVfsDhwGvSPKkKS9/SUl2Ap4JfGiBt2e9/u6imv+ZV+X5yUleB9wOnDqmyay2hb8G9gMeDWym6S5ZbZ7P4nv1U1t3i+XJSm5/qy3sJ7lJ+Z1t0tzn9t7AD6dSXbPMHWl+MKdW1Ufmv19VP6mqW9rnZwE7Jlk/rfqq6vr26w3AR2n+XR61Gm4EfxhwUVV9f/4bs15/re9v6dpqv96wQJuZrsckRwNPB363DYS7mWBb6ERVfb+q7qiqXwLvGrPcma2/NjeeDZw+rs201t2YPOlk+1ttYf9V4CFJ9mn3/o4CzpzX5kxgy5Hn5wL/MG5jX2ltP9/fAFdV1f8Z0+Y3thxDSPJYmnU8lT9GSXZJstuW5zQH8i6f1+xM4EVpPB64aeRfxmkZu1c1y/U3YnQbezHw8QXafAY4JMmebTfFIe20ziU5FHgt8MyqunVMm0m2ha7qGz0G9DtjljvJ73pXngJcXVXXLfTmtNbdInnSzfbX5dHmbTxCfTjNUelvAq9rp/0ZzYYNsDPNv//XAF8B9p1ibQfR/Et1KXBx+zgceDnw8rbNK4EraM4u+DJw4BTr27dd7iVtDVvW32h9Af6qXb+XAYMp/3x3oQnve49Mm9n6o/mjsxm4jabf8z/RHAP6HPAN4LPAXm3bAfDukc/+frsdXgO8ZIr1XUPTX7tlG9xydtr9gbMW2xamVN/72m3rUprgut/8+trXd/td77q2dvp7t2xvI21nse7G5Ukn25/DJUhSD6y2bhxJUgcMe0nqAcNeknrAsJekHjDsJakHDHttN5LcZ2REw++NjLx4S5J3dLjcg5Mc2NX8pZWwbtYFSCulqn5Ic4k+SU4AbqmqN09h0QcDtwBfmsKypG3inr22e+2e9yfb5yckOSXJ+UmuTfLsJH/ejl3+6fbydZL82ySfbwfC+szI5evHtuOPX5rkA+0AVi8H/rj9L+KJSTYk+XCSr7aPJ4ws+31JLkgzBvkfzGiVqIfcs1cf7Qf8e5qxwy8AnlNVr03yUeBpST5FMwjbEVU1l+RI4A00VyweD+xTVT9PskdV/TjJOxn5LyLJ3wNvraovJPlNmsvYf6td9iNp7iOwC/C1JJ+qqu9O7TtXbxn26qOzq+q2JJfR3ETj0+30y4CNwEOBRwDntsP07EBz2T00l7afmuRjjB+R8ynAw/Kr2yzs3o5sCPDxqvoZ8LMk59EMsDVuPtKKMezVRz8HqKpfJrmtfjVmyC9pficCXFFVByzw2afR3AHpGcDrkvybBdrcA3h8Vf3L6MQ2/OePT+J4JZoK++ylu/s6sCHJAdAMQ5vk4UnuATywqs4D/oRmeO1dgZtpbiu3xTnAH215keTRI+8dkWTnJPehObD71S6/EWkLw16ap5rb5D0XeGOSS2hGIzyQpjvn/W33z9eAt1XVj4FPAL+z5QAtcCwwaA/iXklzAHeLS4HzaEb0/B/212taHPVSmpIpnw4q3YV79pLUA+7ZS1IPuGcvST1g2EtSDxj2ktQDhr0k9YBhL0k98P8Bt8PbtE3+AG4AAAAASUVORK5CYII=\n",
+      "text/plain": [
+       "<Figure size 432x288 with 1 Axes>"
+      ]
+     },
+     "metadata": {
+      "needs_background": "light"
+     },
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "plt.scatter(*np.where(train_x[0,:,180:190]), marker='|')\n",
+    "plt.title('Spike trains')\n",
+    "plt.xlabel('Timestep')\n",
+    "plt.xlim([-0.5,20.5])\n",
+    "plt.ylabel('Input index')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The spiking rate corresponds to the grayscale value of the pixels, so the brighter the pixel, the higher the number of spikes. Instead of spike trains, we can also plot 2D images for each timestep:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(-0.5, 139.5, 27.5, -0.5)"
+      ]
+     },
+     "execution_count": 10,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 1152x230.4 with 1 Axes>"
+      ]
+     },
+     "metadata": {
+      "needs_background": "light"
+     },
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "steps = 5 #number of timesteps to plot\n",
+    "plt.matshow(np.hstack(train_x[0,0:steps,:].reshape([steps,28,28])), cmap='binary')\n",
+    "plt.axis('off')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Build the model"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Let's process the inputs using standard LSTMs and also SNNs, with two hidden layers with 250 units each:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "lstm_model = tf.keras.Sequential()\n",
+    "lstm_model.add(tf.keras.layers.InputLayer(input_shape=[None, 28*28]))\n",
+    "lstm_model.add(tf.keras.layers.LSTM(250, return_sequences=True))\n",
+    "lstm_model.add(tf.keras.layers.LSTM(250, return_sequences=True))\n",
+    "lstm_model.add(tf.keras.layers.LSTM(10, return_sequences=True))\n",
+    "lstm_model.add(tf.keras.layers.GlobalAveragePooling1D())  # calculate averaged spiking rate"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Using SNUs instead of LSTMs involves changing the type of the layer, optionally setting custom configuration (here `decay` and `g` function), that can be shortened using `config` dictionary:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Full syntax:\n",
+    "#  model.add(aitf.layers.SNU(250, decay=0.9, g=aitf.activations.leaky_rel, return_sequences=True))\n",
+    "# Shortened syntax with config dictionary:\n",
+    "#  model.add(aitf.layers.SNU(250, **config, return_sequences=True))\n",
+    "config = {'decay': 0.9, 'g': aitf.activations.leaky_rel}\n",
+    "\n",
+    "model = tf.keras.Sequential()\n",
+    "model.add(tf.keras.layers.InputLayer(input_shape=[None, 28*28]))\n",
+    "model.add(aitf.layers.SNU(250, **config, return_sequences=True))\n",
+    "model.add(aitf.layers.SNU(250, **config, return_sequences=True))\n",
+    "model.add(aitf.layers.SNU(10, **config, return_sequences=True))\n",
+    "model.add(tf.keras.layers.GlobalAveragePooling1D())  # calculate averaged spiking rate"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Train"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We train LSTM and SNN for a few epochs only, to quickly run this code also on CPU, but consider running for more epochs to get better accuracy:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "epochs = 3"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Epoch 1/3\n",
+      "4000/4000 [==============================] - 331s 82ms/step - loss: 0.0259 - accuracy: 0.8713\n",
+      "Epoch 2/3\n",
+      "4000/4000 [==============================] - 375s 94ms/step - loss: 0.0124 - accuracy: 0.9297\n",
+      "Epoch 3/3\n",
+      "4000/4000 [==============================] - 374s 93ms/step - loss: 0.0094 - accuracy: 0.9469\n",
+      "313/313 [==============================] - 26s 79ms/step - loss: 0.0098 - accuracy: 0.9435\n",
+      "LSTM Loss 0.00975897628813982, Accuracy 0.9434999823570251\n",
+      "Finished. Total time: 1106.3 [s]\n"
+     ]
+    }
+   ],
+   "source": [
+    "# This will take ~20 minutes on CPU\n",
+    "time_start = time.time()\n",
+    "lstm_model.compile(optimizer=tf.keras.optimizers.SGD(learning_rate=0.5), loss='mse', metrics=['accuracy'])\n",
+    "lstm_model.fit(train_x, train_y, epochs=epochs, batch_size=15)\n",
+    "loss, acc = lstm_model.evaluate(test_x, test_y)\n",
+    "print(\"LSTM Loss {}, Accuracy {}\".format(loss, acc))\n",
+    "print('Finished. Total time: {0:.1f} [s]'.format(time.time() - time_start))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Epoch 1/3\n",
+      "4000/4000 [==============================] - 83s 20ms/step - loss: 0.0249 - accuracy: 0.8771\n",
+      "Epoch 2/3\n",
+      "4000/4000 [==============================] - 86s 21ms/step - loss: 0.0150 - accuracy: 0.9290\n",
+      "Epoch 3/3\n",
+      "4000/4000 [==============================] - 88s 22ms/step - loss: 0.0123 - accuracy: 0.9433\n",
+      "313/313 [==============================] - 4s 13ms/step - loss: 0.0112 - accuracy: 0.9484 0s - loss: 0.0111 - ac\n",
+      "SNN Loss 0.011233299039304256, Accuracy 0.9484000205993652\n",
+      "Finished. Total time: 262.2 [s]\n"
+     ]
+    }
+   ],
+   "source": [
+    "# This will take ~5 minutes on CPU\n",
+    "time_start = time.time()\n",
+    "model.compile(optimizer=tf.keras.optimizers.SGD(learning_rate=0.5), loss='mse', metrics=['accuracy'])\n",
+    "model.fit(train_x, train_y, epochs=epochs, batch_size=15)\n",
+    "loss, acc = model.evaluate(test_x, test_y)\n",
+    "print(\"SNN Loss {}, Accuracy {}\".format(loss, acc))\n",
+    "print('Finished. Total time: {0:.1f} [s]'.format(time.time() - time_start))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Comparing LSTM vs. SNN model:\n",
+    "\n",
+    "* SNN is faster to train and execute by ~4x\n",
+    "* SNN achieves higher accuracy"
+   ]
+  }
+ ],
+ "metadata": {
+  "jupytext": {
+   "formats": "ipynb,py:percent"
+  },
+  "kernelspec": {
+   "display_name": "ToolkitEnv2",
+   "language": "python",
+   "name": "toolkitenv2"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.8"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}

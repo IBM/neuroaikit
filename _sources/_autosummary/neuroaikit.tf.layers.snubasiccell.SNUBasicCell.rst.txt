@@ -1,0 +1,72 @@
+neuroaikit.tf.layers.snubasiccell.SNUBasicCell
+==============================================
+
+.. currentmodule:: neuroaikit.tf.layers.snubasiccell
+
+.. autoclass:: SNUBasicCell
+   :members:
+   :show-inheritance:
+   :no-inherited-members:
+   :special-members: __call__, __add__, __mul__
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~SNUBasicCell.add_loss
+      ~SNUBasicCell.add_update
+      ~SNUBasicCell.add_variable
+      ~SNUBasicCell.add_weight
+      ~SNUBasicCell.apply
+      ~SNUBasicCell.build
+      ~SNUBasicCell.call
+      ~SNUBasicCell.compute_mask
+      ~SNUBasicCell.compute_output_shape
+      ~SNUBasicCell.count_params
+      ~SNUBasicCell.from_config
+      ~SNUBasicCell.get_config
+      ~SNUBasicCell.get_input_at
+      ~SNUBasicCell.get_input_mask_at
+      ~SNUBasicCell.get_input_shape_at
+      ~SNUBasicCell.get_losses_for
+      ~SNUBasicCell.get_output_at
+      ~SNUBasicCell.get_output_mask_at
+      ~SNUBasicCell.get_output_shape_at
+      ~SNUBasicCell.get_updates_for
+      ~SNUBasicCell.get_weights
+      ~SNUBasicCell.set_weights
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SNUBasicCell.activity_regularizer
+      ~SNUBasicCell.dtype
+      ~SNUBasicCell.graph
+      ~SNUBasicCell.inbound_nodes
+      ~SNUBasicCell.input
+      ~SNUBasicCell.input_mask
+      ~SNUBasicCell.input_shape
+      ~SNUBasicCell.losses
+      ~SNUBasicCell.name
+      ~SNUBasicCell.non_trainable_variables
+      ~SNUBasicCell.non_trainable_weights
+      ~SNUBasicCell.outbound_nodes
+      ~SNUBasicCell.output
+      ~SNUBasicCell.output_mask
+      ~SNUBasicCell.output_shape
+      ~SNUBasicCell.scope_name
+      ~SNUBasicCell.trainable_variables
+      ~SNUBasicCell.trainable_weights
+      ~SNUBasicCell.updates
+      ~SNUBasicCell.variables
+      ~SNUBasicCell.weights
+   
+   

@@ -1,0 +1,6 @@
+neuroaikit.common.utils.transform\_rate
+=======================================
+
+.. currentmodule:: neuroaikit.common.utils
+
+.. autofunction:: transform_rate

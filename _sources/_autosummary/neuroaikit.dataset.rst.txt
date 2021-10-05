@@ -1,0 +1,30 @@
+neuroaikit.dataset
+==================
+
+.. automodule:: neuroaikit.dataset
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. autosummary::
+   :toctree:
+   :template: custom-module-template.rst
+   :recursive:
+
+   neuroaikit.dataset.datasets
+

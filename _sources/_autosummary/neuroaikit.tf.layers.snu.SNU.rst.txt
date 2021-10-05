@@ -1,0 +1,6 @@
+neuroaikit.tf.layers.snu.SNU
+============================
+
+.. currentmodule:: neuroaikit.tf.layers.snu
+
+.. autofunction:: SNU

@@ -1,0 +1,6 @@
+neuroaikit.common.utils.override\_config
+========================================
+
+.. currentmodule:: neuroaikit.common.utils
+
+.. autofunction:: override_config

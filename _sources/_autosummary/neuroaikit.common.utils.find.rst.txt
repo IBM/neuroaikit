@@ -1,0 +1,6 @@
+neuroaikit.common.utils.find
+============================
+
+.. currentmodule:: neuroaikit.common.utils
+
+.. autofunction:: find

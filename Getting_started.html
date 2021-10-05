@@ -1,0 +1,343 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>3. Getting started &mdash; NeuroAIKit  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "math|output_area"}}</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. Examples" href="Examples/index.html" />
+    <link rel="prev" title="2. SNU" href="SNU.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/neuromorphic_150_text.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SNU.html">2. SNU</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Installation">3.1. Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Preparation---Option-A:-Python3-venv">3.1.1. Preparation - Option A: Python3 venv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Preparation---Option-B:-Conda">3.1.2. Preparation - Option B: Conda</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Jupyter-setup">3.1.3. Jupyter setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Toolkit-installation">3.1.4. Toolkit installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Toolkit-removal">3.1.5. Toolkit removal</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Running-examples">3.2. Running examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Examples/index.html">4. Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Code:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/neuroaikit.html">neuroaikit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="py-modindex.html">Python module index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Community:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contact.html">Contact</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NeuroAIKit</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">3. </span>Getting started</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="Getting-started">
+<h1><span class="section-number">3. </span>Getting started<a class="headerlink" href="#Getting-started" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Installation">
+<h2><span class="section-number">3.1. </span>Installation<a class="headerlink" href="#Installation" title="Permalink to this headline">¶</a></h2>
+<p>Please download or clone the <a class="reference external" href="https://github.com/IBM/neuroaikit/">NeuroAIKit Github repository</a> into <code class="docutils literal notranslate"><span class="pre">neuroaikit</span></code> directory by running:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/IBM/neuroaikit.git
+</pre></div>
+</div>
+<p>Next sections describe how to:</p>
+<ul class="simple">
+<li><p>(optional) setup the environment - you can use either A) Python3 venv or B) Conda installation, but we focus our support on Python3 venv</p></li>
+<li><p>(optional) add this environment to Jupyter Notebooks</p></li>
+<li><p>install the NeuroAIKit package in your environment</p></li>
+</ul>
+<p><em>Note</em>: Creating a dedicated enviroment is optional, i.e. it is possible to directly proceed with package installation that would be then installed system-wide. However, creating separate environments for different projects is a recommended programming practice to avoid conflicts between the dependencies and to automate their installation.</p>
+<div class="section" id="Preparation---Option-A:-Python3-venv">
+<h3><span class="section-number">3.1.1. </span>Preparation - Option A: Python3 venv<a class="headerlink" href="#Preparation---Option-A:-Python3-venv" title="Permalink to this headline">¶</a></h3>
+<p>Open the command line prompt at that directory and create a Python virtual enviroment in <code class="docutils literal notranslate"><span class="pre">venv</span></code> directory:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>neuroaikit$ python3 -m venv venv
+</pre></div>
+</div>
+<p>Activate the virtual environment with (Windows):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>neuroaikit$ .\venv\Scripts\activate
+</pre></div>
+</div>
+<p>or (Unix-like):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>neuroaikit$ source ./venv/bin/activate
+</pre></div>
+</div>
+<p>Install required packages into the virtual environment:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(venv) neuroaikit$ pip install -r requirements.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="Preparation---Option-B:-Conda">
+<h3><span class="section-number">3.1.2. </span>Preparation - Option B: Conda<a class="headerlink" href="#Preparation---Option-B:-Conda" title="Permalink to this headline">¶</a></h3>
+<p><em>Note</em>: Support for Conda is experimental. Possible approaches: uncomment relevant requirements in <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>, then run:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>conda create -n neuroaikit_conda --file requirements.txt
+conda activate neuroaikit_conda
+</pre></div>
+</div>
+<p>or install manually:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>conda create -n neuroaikit_conda tensorflow-gpu=2.4 numpy=1.19
+conda activate neuroaikit_conda
+pip install -r requirements.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="Jupyter-setup">
+<h3><span class="section-number">3.1.3. </span>Jupyter setup<a class="headerlink" href="#Jupyter-setup" title="Permalink to this headline">¶</a></h3>
+<p>Examples are based on Jypyter notebooks. Having Jupter installed <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">jupyter</span></code>, you also need to add the toolkit kernel into it. From the <code class="docutils literal notranslate"><span class="pre">venv</span></code> please run the following commands:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(venv) neuroaikit$ pip install ipykernel
+(venv) neuroaikit$ python -m ipykernel install --user --name neuroaikit_venv --display-name &quot;NeuroAIKit venv&quot;
+</pre></div>
+</div>
+<p>This enables to choose “NeuroAIKit venv” as the kernel when you open the Jupyter notebooks.</p>
+</div>
+<div class="section" id="Toolkit-installation">
+<h3><span class="section-number">3.1.4. </span>Toolkit installation<a class="headerlink" href="#Toolkit-installation" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(venv) neuroaikit$ cd ..
+(venv) $ pip install --editable neuroaikit
+</pre></div>
+</div>
+</div>
+<div class="section" id="Toolkit-removal">
+<h3><span class="section-number">3.1.5. </span>Toolkit removal<a class="headerlink" href="#Toolkit-removal" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(venv) $ pip uninstall neuroaikit
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Running-examples">
+<h2><span class="section-number">3.2. </span>Running examples<a class="headerlink" href="#Running-examples" title="Permalink to this headline">¶</a></h2>
+<p>Please start Jupyter</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(venv) neuroaikit$ jupyter notebook
+</pre></div>
+</div>
+<p>and navigate to <code class="docutils literal notranslate"><span class="pre">Website\Examples</span></code> directory.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="Examples/index.html" class="btn btn-neutral float-right" title="4. Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="SNU.html" class="btn btn-neutral float-left" title="2. SNU" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, IBM Research.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

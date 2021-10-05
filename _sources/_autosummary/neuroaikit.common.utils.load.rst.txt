@@ -1,0 +1,6 @@
+neuroaikit.common.utils.load
+============================
+
+.. currentmodule:: neuroaikit.common.utils
+
+.. autofunction:: load

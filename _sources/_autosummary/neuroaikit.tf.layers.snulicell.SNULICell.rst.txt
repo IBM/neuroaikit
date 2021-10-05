@@ -1,0 +1,72 @@
+neuroaikit.tf.layers.snulicell.SNULICell
+========================================
+
+.. currentmodule:: neuroaikit.tf.layers.snulicell
+
+.. autoclass:: SNULICell
+   :members:
+   :show-inheritance:
+   :no-inherited-members:
+   :special-members: __call__, __add__, __mul__
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~SNULICell.add_loss
+      ~SNULICell.add_update
+      ~SNULICell.add_variable
+      ~SNULICell.add_weight
+      ~SNULICell.apply
+      ~SNULICell.build
+      ~SNULICell.call
+      ~SNULICell.compute_mask
+      ~SNULICell.compute_output_shape
+      ~SNULICell.count_params
+      ~SNULICell.from_config
+      ~SNULICell.get_config
+      ~SNULICell.get_input_at
+      ~SNULICell.get_input_mask_at
+      ~SNULICell.get_input_shape_at
+      ~SNULICell.get_losses_for
+      ~SNULICell.get_output_at
+      ~SNULICell.get_output_mask_at
+      ~SNULICell.get_output_shape_at
+      ~SNULICell.get_updates_for
+      ~SNULICell.get_weights
+      ~SNULICell.set_weights
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SNULICell.activity_regularizer
+      ~SNULICell.dtype
+      ~SNULICell.graph
+      ~SNULICell.inbound_nodes
+      ~SNULICell.input
+      ~SNULICell.input_mask
+      ~SNULICell.input_shape
+      ~SNULICell.losses
+      ~SNULICell.name
+      ~SNULICell.non_trainable_variables
+      ~SNULICell.non_trainable_weights
+      ~SNULICell.outbound_nodes
+      ~SNULICell.output
+      ~SNULICell.output_mask
+      ~SNULICell.output_shape
+      ~SNULICell.scope_name
+      ~SNULICell.trainable_variables
+      ~SNULICell.trainable_weights
+      ~SNULICell.updates
+      ~SNULICell.variables
+      ~SNULICell.weights
+   
+   
