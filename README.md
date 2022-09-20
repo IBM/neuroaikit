@@ -1,6 +1,6 @@
-# NeuroAI Toolkit
+# Neuro-inspired AI Toolkit
 
-**Navigate to the NeuroAI Toolkit website https://ibm.github.io/neuroaikit/ for comprehensive documentation.**
+**Navigate to the Neuro-inspired AI Toolkit website https://ibm.github.io/neuroaikit/ for comprehensive documentation.**
 
 This toolkit facilitates use of biologically-inspired AI in TensorFlow 2.x.
 It enables to build SNU-based networks. For more deatail, 

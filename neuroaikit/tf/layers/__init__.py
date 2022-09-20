@@ -1,4 +1,4 @@
-"""Layers provided by NeuroAI Toolkit.
+"""Layers provided by Neuro-inspired AI Toolkit.
 """
 
 #from neuroaikit.tf.layers.snubasiccell import SNUBasicCell

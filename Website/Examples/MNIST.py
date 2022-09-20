@@ -14,9 +14,9 @@
 # ---
 
 # %% [markdown]
-# | [![View in NeuroAIKit Documentation](../_static/toolkit_32px.png)](https://ibm.github.io/neuroaikit/Examples/MNIST.html) |  [![View source on GitHub](../_static/github_32px.png)](https://github.com/IBM/neuroaikit/blob/master/Website/Applications/MNIST.ipynb) |
+# | [![View in Neuro-inspired AI Toolkit Documentation](../_static/toolkit_32px.png)](https://ibm.github.io/neuroaikit/Examples/MNIST.html) |  [![View source on GitHub](../_static/github_32px.png)](https://github.com/IBM/neuroaikit/blob/main/Website/Examples/MNIST.ipynb) |
 # | - | - |
-# | View in NeuroAIKit Documentation | View source on GitHub |
+# | View in Neuro-inspired AI Toolkit Documentation | View source on GitHub |
 
 # %% [markdown]
 # # Image recognition (MNIST)

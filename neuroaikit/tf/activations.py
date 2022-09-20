@@ -1,4 +1,4 @@
-"""Activations provided by NeuroAI Toolkit.
+"""Activations provided by Neuro-inspired AI Toolkit.
 """
 
 import tensorflow as tf

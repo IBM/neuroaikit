@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath('../'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'NeuroAIKit'
+project = 'Neuro-inspired AI Toolkit'
 copyright = '2021, IBM Research'
 author = 'IBM Research'
 

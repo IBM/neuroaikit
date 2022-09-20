@@ -15,9 +15,9 @@
 # ---
 
 # %% [markdown]
-# | [![View in NeuroAIKit Documentation](../_static/toolkit_32px.png)](https://ibm.github.io/neuroaikit/Examples/MNIST_LatInh.html) |  [![View source on GitHub](../_static/github_32px.png)](https://github.com/IBM/neuroaikit/blob/master/Website/Applications/MNIST_LatInh.ipynb) |
+# | [![View in Neuro-inspired AI Toolkit Documentation](../_static/toolkit_32px.png)](https://ibm.github.io/neuroaikit/Examples/MNIST_LatInh.html) |  [![View source on GitHub](../_static/github_32px.png)](https://github.com/IBM/neuroaikit/blob/main/Website/Examples/MNIST_LatInh.ipynb) |
 # | - | - |
-# | View in NeuroAIKit Documentation | View source on GitHub |
+# | View in Neuro-inspired AI Toolkit Documentation | View source on GitHub |
 
 # %% [markdown]
 # # Lateral inhibition (MNIST)
@@ -52,7 +52,7 @@
 # ## Implementation
 
 # %% [markdown]
-# Import the NeuroAIKit, load MNIST data and convert into spikes.
+# Import the toolkit, load MNIST data and convert into spikes.
 
 # %%
 import neuroaikit as ai

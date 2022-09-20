@@ -7,7 +7,7 @@
 ## Publishing
 
 ### First time setup
-Run in the NeuroAI Toolkit directory:
+Run in the Neuro-inspired AI Toolkit directory:
 ```
 neuroaikit$ git clone -b gh-pages --single-branch https://github.com/IBM/neuroaikit.git ../neuroaikit_gh-pages
 ```

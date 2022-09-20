@@ -1,4 +1,4 @@
-"""TensorFlow-specific functionality of the NeuroAI Toolkit.
+"""TensorFlow-specific functionality of the Neuro-inspired AI Toolkit.
 """
 
 #import neuroaikit.tf.layers

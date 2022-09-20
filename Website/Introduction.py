@@ -20,7 +20,7 @@
 # The astonishing progress in artificial intelligence in recent years has been driven by the insights on how the neural networks in the brain work. However, apart from the networked structure of modern ANNs (Artificial Neural Networks), biology exhibits much more versatility in terms of dynamics, connectivity patterns and learning capabilities.
 
 # %% [markdown]
-# ## Why this NeuroAIKit?
+# ## Why this Neuro-inspired AI Toolkit?
 #
 # To improve the efficiency, accuracy and to push forward the limits of modern AI, we focus on the application of biologically-inspired insights to practical Machine Learning tasks.
 #
@@ -30,7 +30,7 @@
 #
 # ### For engineers
 #
-# NeuroAIKit's modules can be integrated into typical AI frameworks. It provides means to easily incorporate qualitatively new dynamics into your machine learning models, that enable efficient solutions of existing tasks (e.g. SNU unit can be up to 8x faster than LSTM) or enable solutions of completely new tasks. Code changes are minimal and typically involve just subsituting the units in the network definitions or the optimizer. See examples section for code details.
+# Neuro-inspired AI Toolkit's modules can be integrated into typical AI frameworks. It provides means to easily incorporate qualitatively new dynamics into your machine learning models, that enable efficient solutions of existing tasks (e.g. SNU unit can be up to 8x faster than LSTM) or enable solutions of completely new tasks. Code changes are minimal and typically involve just subsituting the units in the network definitions or the optimizer. See examples section for code details.
 
 # %% [markdown]
 # ## Neuro-inspired AI

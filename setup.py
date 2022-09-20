@@ -23,7 +23,7 @@ setup(
 
     # corresponds to the "Summary" metadata field:
     # https://packaging.python.org/specifications/core-metadata/#summary
-    description='NeuroAIKit',  # Optional
+    description='Neuro-inspired AI Toolkit',  # Optional
     long_description=long_description,  # Optional
     long_description_content_type='text/markdown',  # Optional
     # This should be a valid link to your project's main homepage.
