@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>neuroaikit.tf.layers.snulicell.SNULICell &mdash; NeuroAIKit  documentation</title>
+  <title>neuroaikit.tf.layers.snulicell.SNULICell &mdash; Neuro-inspired AI Toolkit  documentation</title>
   
 
   
@@ -138,7 +138,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">NeuroAIKit</a>
+          <a href="../index.html">Neuro-inspired AI Toolkit</a>
         
       </nav>
 
@@ -224,8 +224,8 @@
 <h1>neuroaikit.tf.layers.snulicell.SNULICell<a class="headerlink" href="#neuroaikit-tf-layers-snulicell-snulicell" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="neuroaikit.tf.layers.snulicell.SNULICell">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neuroaikit.tf.layers.snulicell.</span></span><span class="sig-name descname"><span class="pre">SNULICell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">units</span></em>, <em class="sig-param"><span class="pre">decay=0.8</span></em>, <em class="sig-param"><span class="pre">activation=&lt;function</span> <span class="pre">step_function&gt;</span></em>, <em class="sig-param"><span class="pre">g=&lt;function</span> <span class="pre">identity&gt;</span></em>, <em class="sig-param"><span class="pre">recurrent=False</span></em>, <em class="sig-param"><span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/neuroaikit/tf/layers/snulicell.html#SNULICell"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neuroaikit.tf.layers.snulicell.SNULICell" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tensorflow.python.keras._impl.keras.engine.base_layer.Layer</span></code></p>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neuroaikit.tf.layers.snulicell.</span></span><span class="sig-name descname"><span class="pre">SNULICell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/neuroaikit/tf/layers/snulicell.html#SNULICell"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neuroaikit.tf.layers.snulicell.SNULICell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">keras.engine.base_layer.Layer</span></code></p>
 <p>This is a lateral inhibition SNU cell.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -251,68 +251,80 @@ defaults to tf.identity (no constraint)</p></li>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_loss</span></code></p></td>
 <td><p>Add loss tensor(s), potentially dependent on layer inputs.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_update</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_metric</span></code></p></td>
+<td><p>Adds metric tensor to the layer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_update</span></code></p></td>
 <td><p>Add update op(s), potentially dependent on layer inputs.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_variable</span></code></p></td>
-<td><p>Adds a new variable to the layer, or gets an existing one; returns it.</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_variable</span></code></p></td>
+<td><p>Deprecated, do NOT use! Alias for <cite>add_weight</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_weight</span></code></p></td>
-<td><p>Adds a weight variable to the layer.</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_weight</span></code></p></td>
+<td><p>Adds a new variable to the layer.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code></p></td>
-<td><p>Apply the layer on a input.</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code></p></td>
+<td><p>Deprecated, do NOT use!</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#neuroaikit.tf.layers.snulicell.SNULICell.build" title="neuroaikit.tf.layers.snulicell.SNULICell.build"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#neuroaikit.tf.layers.snulicell.SNULICell.build" title="neuroaikit.tf.layers.snulicell.SNULICell.build"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build</span></code></a></p></td>
 <td><p>Overriding build method that creates the variables</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#neuroaikit.tf.layers.snulicell.SNULICell.call" title="neuroaikit.tf.layers.snulicell.SNULICell.call"><code class="xref py py-obj docutils literal notranslate"><span class="pre">call</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#neuroaikit.tf.layers.snulicell.SNULICell.call" title="neuroaikit.tf.layers.snulicell.SNULICell.call"><code class="xref py py-obj docutils literal notranslate"><span class="pre">call</span></code></a></p></td>
 <td><p>Overriding call method that defines the cell dynamics’ graph</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_mask</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_mask</span></code></p></td>
 <td><p>Computes an output mask tensor.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_output_shape</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_output_shape</span></code></p></td>
 <td><p>Computes the output shape of the layer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_output_signature</span></code></p></td>
+<td><p>Compute the output tensor signature of the layer based on the inputs.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">count_params</span></code></p></td>
 <td><p>Count the total number of scalars composing the weights.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_config</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">finalize_state</span></code></p></td>
+<td><p>Finalizes the layers state after updating layer weights.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_config</span></code></p></td>
 <td><p>Creates a layer from its config.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_config</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_config</span></code></p></td>
 <td><p>Returns the config of the layer.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_at</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_at</span></code></p></td>
 <td><p>Retrieves the input tensor(s) of a layer at a given node.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_mask_at</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_mask_at</span></code></p></td>
 <td><p>Retrieves the input mask tensor(s) of a layer at a given node.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_shape_at</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_shape_at</span></code></p></td>
 <td><p>Retrieves the input shape(s) of a layer at a given node.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_losses_for</span></code></p></td>
-<td><p>Retrieves losses relevant to a specific set of inputs.</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_losses_for</span></code></p></td>
+<td><p>Deprecated, do NOT use!</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_at</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_at</span></code></p></td>
 <td><p>Retrieves the output tensor(s) of a layer at a given node.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_mask_at</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_mask_at</span></code></p></td>
 <td><p>Retrieves the output mask tensor(s) of a layer at a given node.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_shape_at</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_shape_at</span></code></p></td>
 <td><p>Retrieves the output shape(s) of a layer at a given node.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_updates_for</span></code></p></td>
-<td><p>Retrieves updates relevant to a specific set of inputs.</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_updates_for</span></code></p></td>
+<td><p>Deprecated, do NOT use!</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_weights</span></code></p></td>
-<td><p>Returns the current weights of the layer.</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_weights</span></code></p></td>
+<td><p>Returns the current weights of the layer, as NumPy arrays.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_weights</span></code></p></td>
-<td><p>Sets the weights of the layer, from Numpy arrays.</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_weights</span></code></p></td>
+<td><p>Sets the weights of the layer, from NumPy arrays.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_name_scope</span></code></p></td>
+<td><p>Decorator to automatically enter the module name scope.</p></td>
 </tr>
 </tbody>
 </table>
@@ -326,11 +338,17 @@ defaults to tf.identity (no constraint)</p></li>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">activity_regularizer</span></code></p></td>
 <td><p>Optional regularizer function for the output of this layer.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dtype</span></code></p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_dtype</span></code></p></td>
+<td><p>The dtype of the layer’s computations.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">graph</span></code></p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dtype</span></code></p></td>
+<td><p>The dtype of the layer weights.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dtype_policy</span></code></p></td>
+<td><p>The dtype policy associated with this layer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dynamic</span></code></p></td>
+<td><p>Whether the layer is dynamic (eager-only); set in the constructor.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inbound_nodes</span></code></p></td>
 <td><p>Deprecated, do NOT use! Only for compatibility with external Keras.</p></td>
@@ -344,46 +362,67 @@ defaults to tf.identity (no constraint)</p></li>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_shape</span></code></p></td>
 <td><p>Retrieves the input shape(s) of a layer.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">losses</span></code></p></td>
-<td><p>Losses which are associated with this <cite>Layer</cite>.</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_spec</span></code></p></td>
+<td><p><cite>InputSpec</cite> instance(s) describing the input format for this layer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">losses</span></code></p></td>
+<td><p>List of losses added using the <cite>add_loss()</cite> API.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">metrics</span></code></p></td>
+<td><p>List of metrics added using the <cite>add_metric()</cite> API.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></p></td>
-<td><p></p></td>
+<td><p>Name of the layer (string), set in the constructor.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">non_trainable_variables</span></code></p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">name_scope</span></code></p></td>
+<td><p>Returns a <cite>tf.name_scope</cite> instance for this class.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">non_trainable_weights</span></code></p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">non_trainable_variables</span></code></p></td>
+<td><p>Sequence of non-trainable variables owned by this module and its submodules.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">outbound_nodes</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">non_trainable_weights</span></code></p></td>
+<td><p>List of all non-trainable weights tracked by this layer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">outbound_nodes</span></code></p></td>
 <td><p>Deprecated, do NOT use! Only for compatibility with external Keras.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output</span></code></p></td>
 <td><p>Retrieves the output tensor(s) of a layer.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_mask</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_mask</span></code></p></td>
 <td><p>Retrieves the output mask tensor(s) of a layer.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_shape</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_shape</span></code></p></td>
 <td><p>Retrieves the output shape(s) of a layer.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">scope_name</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">stateful</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">submodules</span></code></p></td>
+<td><p>Sequence of all sub-modules.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">supports_masking</span></code></p></td>
+<td><p>Whether this layer supports computing a mask using <cite>compute_mask</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">trainable</span></code></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">trainable_variables</span></code></p></td>
-<td><p></p></td>
+<td><p>Sequence of trainable variables owned by this module and its submodules.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">trainable_weights</span></code></p></td>
-<td><p></p></td>
+<td><p>List of all trainable weights tracked by this layer.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">updates</span></code></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">variables</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable_dtype</span></code></p></td>
+<td><p>Alias of <cite>Layer.dtype</cite>, the dtype of the weights.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">variables</span></code></p></td>
 <td><p>Returns the list of all layer variables/weights.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">weights</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">weights</span></code></p></td>
 <td><p>Returns the list of all layer variables/weights.</p></td>
 </tr>
 </tbody>
