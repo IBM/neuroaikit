@@ -30,25 +30,26 @@ Please visit the toolkit website for more detail.
 pip uninstall neuroaikit
 ```
 
-## Upgrade to TF 2.9
-
-Some differences between our original TensorFlow 2.5 code and the modified code for TensorFlow 2.9:
-
-1. **Import Statements:**
-   - In the original code, we have imports from the `neuroaikit.tf` module, which is not standard TensorFlow; these remain by default.
-   - Additionally, one could optionally also try the standard modules when/iff necessary:
-   - Specifically, `import tensorflow as tf` and `from tensorflow.keras.layers import RNN, Layer` could be used for generic (non-SNU) layers and models.
-
-2. **Class Inheritance:**
-   - In the original code, we inherit always from `tf.keras.layers.Layer`. In the modified tf 2.9 code, the `Layer` class from TensorFlow could be also used for class inheritance.
-
-3. **Instantiation of Layers:**
-   - In the original code,  we directly instantiated `tf.keras.layers.RNN` and using `add_weight` for layer variables. In the modified code, `RNN` is instantiated and `add_weight` is used within the `build` method of the custom cell classes.
-
-4. **Reduce Max Function:**
-   - In the `SNULICell` class, the use of `tf.reduce_max` was added to mimic the lateral inhibition logic you had in the original code.
-
-Overall, the modifications involve changing imports, class inheritance, and adjusting the code to conform to TensorFlow 2.9 conventions and API changes.
+## Upgrade to TF 2.9 Changes and Diffs
 
 
+### 1. Import Statements:
 
+- In the original code, we maintain imports from the custom `neuroaikit.tf` module, which contains the specialized SNU (Spiking Neural Unit) layers and activations specific to our project.
+- In TensorFlow 2.9, we now use standard TensorFlow modules, specifically `from tensorflow.keras.layers import RNN, Layer`, for SNU-related layers and models. This change is necessary to align with TensorFlow 2.9's conventions and ensure compatibility with SNU layers.
+
+### 2. Class Inheritance:
+
+- In the original code, we always inherit from `tf.keras.layers.Layer` for consistency with our custom SNU layers.
+- In the modified TensorFlow 2.9 code, we use the `Layer` class from TensorFlow for class inheritance.
+
+### 3. Instantiation of Layers:
+
+- In the original code, we directly instantiate `tf.keras.layers.RNN` and use the `add_weight` method for defining layer variables.
+- In the modified code for TensorFlow 2.9, we create instances of `RNN`, and the definition of layer variables is moved to the `build` method within the custom cell classes. This adjustment adheres to the TensorFlow 2.9 conventions.
+
+### 4. `tf.reduce_max` Function:
+
+- In the `SNULICell` class, the use of `tf.reduce_max` is introduced to replicate the lateral inhibition logic present in the original code. This adjustment is made to ensure that lateral inhibition functionality remains consistent in TensorFlow 2.9.
+
+Overall, these modifications are made to accommodate TensorFlow 2.9's changes while retaining the integrity and compatibility of our custom `neuroaikit.tf` module, which contains SNU-related layers and activations.
