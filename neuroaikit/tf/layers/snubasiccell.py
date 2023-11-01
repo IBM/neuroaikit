@@ -62,7 +62,7 @@
 """
 from neuroaikit.tf.activations import *
 
-class SNUBasicCell(Layer):
+class SNUBasicCell(tf.keras.layers.Layer):
     def __init__(self, units, decay=0.8, activation=step_function, g=tf.identity, recurrent=False, **kwargs):
         super(SNUBasicCell, self).__init__(**kwargs)
         self.units = units
