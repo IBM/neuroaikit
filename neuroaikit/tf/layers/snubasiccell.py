@@ -60,9 +60,23 @@
 #==============================================
 """Contains basic SNU cell definition in tf 2.9.
 """
+import tensorflow as tf
+from tensorflow.keras.layers import RNN, Layer
+
 from neuroaikit.tf.activations import *
 
-class SNUBasicCell(tf.keras.layers.Layer):
+class SNUBasicCell(Layer):
+    """This is a basic SNU cell.
+
+    :param units: Number of units to create in the layer
+    :param decay: Membrane potential decay multiplier, defaults to 0.8,
+        i.e. 0.8 of the previous membrane potential is retained
+    :param activation: Activation function, defaults to step_function. See TF_Misc.Activations.
+    :param g: Internal state activation function that optionally constraints the state,
+        defaults to tf.identity (no constraint)
+    :param recurrent: bool, defaults to False. If True, SNU includes recurrent connections inside entire layer.
+    """
+    
     def __init__(self, units, decay=0.8, activation=step_function, g=tf.identity, recurrent=False, **kwargs):
         super(SNUBasicCell, self).__init__(**kwargs)
         self.units = units
