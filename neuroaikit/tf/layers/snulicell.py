@@ -62,6 +62,8 @@
 #===========================================================
 """Contains lateral-inhibition SNU cell definition in tf 2.9.
 """
+ from neuroaikit.tf.activations import *
+
 class SNULICell(Layer):
     def __init__(self, units, decay=0.8, activation=step_function, g=tf.identity, recurrent=False, **kwargs):
         super(SNULICell, self).__init__(**kwargs)
