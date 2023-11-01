@@ -30,13 +30,14 @@
 #=================================================================
 """Contains generic SNU function for creating SNU layers in tf 2.9.
 """
+import tensorflow as tf
+from tensorflow.keras.layers import RNN
 from neuroaikit.tf.activations import *
 from .snubasiccell import SNUBasicCell
 from .snulicell import SNULICell
-import tensorflow as tf
 
 def SNU(units, activation=step_function, decay=0.8, g=tf.identity, recurrent=False, lateral_inhibition=False, **kwargs):
     cell = SNUBasicCell
     if lateral_inhibition:
         cell = SNULICell
-    return tf.keras.layers.RNN(cell(units, activation=activation, decay=decay, g=g, recurrent=recurrent), **kwargs)
+    return RNN(cell(units, activation=activation, decay=decay, g=g, recurrent=recurrent), **kwargs)
