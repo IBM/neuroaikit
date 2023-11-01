@@ -62,7 +62,9 @@
 #===========================================================
 """Contains lateral-inhibition SNU cell definition in tf 2.9.
 """
- from neuroaikit.tf.activations import *
+import tensorflow as tf
+from tensorflow.keras.layers import RNN, Layer
+from neuroaikit.tf.activations import *
 
 class SNULICell(tf.keras.layers.Layer):
     def __init__(self, units, decay=0.8, activation=step_function, g=tf.identity, recurrent=False, **kwargs):
