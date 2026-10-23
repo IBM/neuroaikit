@@ -16,7 +16,14 @@ pip install --editable neuroaikit
 ```
 *Note*: Editable install enables you to modify the toolkit code and thus to contribute your ideas. 
 
-*Note*: Currently the installer does not install the requirements yet. Please see `requirements.txt` for some of the requirements.
+*Note*: Currently the `requirements.txt` file with for automatic installation of dependencies was removed due to frequent version changes. Depending on what you need to run, following packages may need to be installed to your environment via `pip install`:
+
+* **TensorFlow** or **PyTorch** (depending on the desired backend)
+* **Pandas**
+* **Matplotlib**
+* **tqdm**
+* **scikit-learn**
+* **Datasets** — *Required by the NER example.*
 
 To verify the installation:
 ```
